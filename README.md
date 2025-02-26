@@ -50,5 +50,7 @@
    kubectl apply -f deployment.yaml
    ```
 7. Access the frontend service via:
+![image](https://github.com/user-attachments/assets/53b6a7fb-7e5f-4eaf-8a19-557add8d82b0)
+
 
  
