@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+USER root
+
+# Update packages and install necessary tools
+RUN apt update -y && apt install -y default-jdk wget unzip
+
+# Set working directory
+WORKDIR /opt/tomcat/
+
+# Download and extract Tomcat 10 (ZIP format)
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.36/bin/apache-tomcat-10.1.36.zip \
+    && unzip apache-tomcat-10.1.36.zip \
+    && rm apache-tomcat-10.1.36.zip
+
+# Download WAR file and MySQL connector
+RUN wget -O /opt/tomcat/apache-tomcat-10.1.36/webapps/student.war https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war \
+    && wget -O /opt/tomcat/apache-tomcat-10.1.36/lib/mysql-connector.jar https://s3-us-west-2.amazonaws.com/studentapi-cit/mysql-connector.jar
+
+# Copy context.xml file
+COPY context.xml /opt/tomcat/apache-tomcat-10.1.36/conf/context.xml
+
+# Set execute permission for Catalina script
+RUN chmod +x /opt/tomcat/apache-tomcat-10.1.36/bin/catalina.sh
+
+# Expose Tomcat default port
+EXPOSE 8080
+
+# Start Tomcat
+CMD ["/opt/tomcat/apache-tomcat-10.1.36/bin/catalina.sh", "run"]
+
