@@ -51,4 +51,4 @@
    ```
 7. Access the frontend service via:
 
-   ![image](https://github.com/user-attachments/assets/21432a9b-8229-4ee8-8c48-21c2d54be50e)
+ 
