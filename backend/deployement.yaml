@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: studentapp-container
-          image: abhipraydh96/backend-b45:v2
+          image: rutugandhdocker1/tomcat:latest
           ports:
             - containerPort: 8080
           resources:
